@@ -12,12 +12,13 @@ import * as $ from "jquery";
 })
 export class CarPredictComponent implements OnInit {
 
-  TEMP_FILE;
-  MODEL_URL ='/assets/models/car-predict/model.json';
+  TEMP_FILE: any;
+  model: automl.ObjectDetectionModel;
 
   constructor(private renderer:Renderer2) { }
 
   ngOnInit() {
+    this.loadModel();
   }
   
   updateSvg() {
@@ -40,11 +41,15 @@ export class CarPredictComponent implements OnInit {
     }
   }
 
+  async loadModel() {
+    const MODEL_URL ='/assets/models/car-predict/model.json';
+    this.model = await automl.loadObjectDetection(MODEL_URL);
+  }
+
   async predict(){
     const image = document.getElementById('image-upload');
     const options = { score: 0.5, iou: 0.5, topk: 20 };
-    const model = await automl.loadObjectDetection(this.MODEL_URL);
-    const predictions = await model.detect(<automl.ImageInput>image, options);
+    const predictions = await this.model.detect(<automl.ImageInput>image, options);
 
     console.log(predictions);
     this.drawBoxes(predictions);
