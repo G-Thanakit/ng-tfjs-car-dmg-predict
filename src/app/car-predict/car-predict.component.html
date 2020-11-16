@@ -1,0 +1,21 @@
+<form enctype="multipart/form-data">
+    
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="background-color:#0464a4;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" style="color: white;">Cloud Ace Demo : Cars damage detection with Tensorflow JS</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="main-container">
+        <svg class="canvas" width="0" height="0"></svg>
+        <img class="display-img" id="image-upload" src="/assets/img/non-image.png"/>
+        
+        <div>
+            <input class="input-img" type='file' name='file' (change)="readImage($event.target.files)"/>
+            <input class="btn btn-primary" (click)="predict()" type="button" value="Predict">
+        </div>
+    </div>
+
+</form>

@@ -1,0 +1,28 @@
+.main-container {
+    text-align: center;
+}
+
+.canvas {
+    position: absolute;
+    margin: 1em;
+}
+
+.display-img {
+    margin: 1em;
+}
+
+.box {
+    stroke-width: 2;
+    fill: none;
+    stroke: red;
+}
+
+.label {
+    font-size: 12px;
+    fill: white;
+    text-anchor: middle;
+}
+
+.label-rect {
+    fill: black;
+}
