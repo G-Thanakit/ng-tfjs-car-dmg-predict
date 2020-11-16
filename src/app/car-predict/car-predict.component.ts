@@ -2,7 +2,6 @@ import { Component, OnInit, Renderer2} from '@angular/core';
 import '@tensorflow/tfjs-backend-cpu';
 import '@tensorflow/tfjs-backend-webgl';
 import * as automl from '@tensorflow/tfjs-automl';
-import * as $ from "jquery";
 
 
 @Component({
@@ -11,7 +10,7 @@ import * as $ from "jquery";
   styleUrls: ['./car-predict.component.css']
 })
 export class CarPredictComponent implements OnInit {
-
+  
   TEMP_FILE: any;
   model: automl.ObjectDetectionModel;
 
@@ -50,8 +49,7 @@ export class CarPredictComponent implements OnInit {
     const image = document.getElementById('image-upload');
     const options = { score: 0.5, iou: 0.5, topk: 20 };
     const predictions = await this.model.detect(<automl.ImageInput>image, options);
-
-    console.log(predictions);
+    
     this.drawBoxes(predictions);
   }
 
@@ -90,13 +88,15 @@ export class CarPredictComponent implements OnInit {
 
   resetSvg(){
     const svg = document.querySelector('svg');
+    const text = document.querySelector('text');
     this.renderer.setAttribute(svg, 'width', '0');
     this.renderer.setAttribute(svg, 'height', '0');
     var rect = document.getElementsByTagName("rect"), index;
     for (index = rect.length - 1; index >= 0; index--) {
       rect[index].parentNode.removeChild(rect[index]);
     }
-    $("text").remove();
+    if(text != null)
+      text.remove();
   }
 
 }
